@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Dart Chat</title>
+      <link rel="stylesheet" href="chat.css"></link>
+   </head>
+   <body>
+      <h1 id="title"><img src="images/dart_logo_270x270.png" />Dart Chat</h1>
+      <div id="overlay" class="unregistered">
+         <div id="register">
+            <p id="notice">Please enter your username</p>
+            <input id="user-name" type="text"></input>
+            <button id="sign-in" type="button">Sign in</button>
+            <p id="info"></p>
+         </div>
+      </div>
+      <div>
+      <div id="chat">
+         <table id="messages">
+            <tbody id="message-body">
+            </tbody>
+         </table>
+         <input id="chat-input" type="text"></input>
+         <button id="send-button" type="button">Send</button>
+      </div>
+
+      <script type="application/dart" src="chat.dart"></script>
+      <script src="packages/browser/dart.js"></script>
+   </body>
+   <footer>
+      &copy; 2013 James Slocum
+   </footer>
+
+</html>

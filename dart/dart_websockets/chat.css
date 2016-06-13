@@ -1,0 +1,226 @@
+html {
+   height: 100%;
+   background-attachment: fixed;
+   background-image: -webkit-gradient(
+           linear,
+           left top,
+           right bottom,
+           color-stop(0, #3470C3),
+           color-stop(1, #4FE8AD)
+   );
+   background-image: -o-linear-gradient(right bottom, #3470C3 0%, #4FE8AD 100%);
+   background-image: -moz-linear-gradient(right bottom, #3470C3 0%, #4FE8AD 100%);
+   background-image: -webkit-linear-gradient(right bottom, #3470C3 0%, #4FE8AD 100%);
+   background-image: -ms-linear-gradient(right bottom, #3470C3 0%, #4FE8AD 100%);
+   background-image: linear-gradient(to right bottom, #3470C3 0%, #4FE8AD 100%);
+}
+
+body {
+   font-size: 18px;
+}
+
+footer {
+   position: fixed;
+   bottom: 0%;
+   right: 0%;
+}
+
+#title {
+   text-align: center;
+   font-size: 500%;
+}
+
+#title img {
+   width: 64px;
+   height: 64px;
+}
+
+#overlay {
+   height: 100%;
+   width: 100%;
+   position: fixed;
+   left: 0;
+   top: 0;
+   background-color: black;
+}
+
+#register {
+   text-align: center;
+   font-size: 28px;
+   height: 300px;
+   width: 300px;
+   background-color: white;
+   margin-top: 15%;
+   margin-bottom: auto;
+   margin-left: auto;
+   margin-right: auto;
+   border-style: solid;
+   border-color: white;
+   border-width: 3px;
+   border-radius: 10px;
+}
+
+#user-name {
+   border: solid;
+   color: black;
+   border-color: black;
+   border-width: 1px;
+   border-radius: 5px;
+   font-size: 18px;
+   padding: 5px;
+}
+
+#sign-in {
+   display: block;
+   font-size: 24px;
+   padding: 5px;
+   margin: auto;
+   margin-top: 30px;
+   color: black;
+   border-style: none;
+   background-color: #888888;
+   border-radius: 5px;
+
+}
+
+#info {
+   font-size: 14px;
+   color: red;
+}
+
+#chat {
+   width: 600px;
+   margin: auto;
+}
+
+#messages {
+   width: 500px;
+   height: 400px;
+   background-color: white;
+   margin: auto;
+   margin-bottom: 10px;
+   border-style: solid;
+   border-width: 1px;
+   box-shadow: 10px 10px 5px #888888;
+   border-radius: 10px;
+}
+
+#message-body {
+   height: 400px;
+   display: block;
+   overflow-y: scroll;
+}
+
+#chat-input {
+   width: 440px;
+   padding-top 10px;
+   margin-top: 10px;
+   margin-left: 50px;
+   font-size: 18px;
+   border-style: solid;
+   border-color: black;
+   border-width: 1px;
+   box-shadow: 5px 5px 2px #888888;
+   border-radius: 5px;
+}
+
+#send-button {
+   width: 60px;
+   font-size: 20px;
+   color: black;
+   border-style: none;
+   margin-left: 5px;
+   background-color: #888888;
+   border-radius: 5px;
+}
+
+.from-remote {
+   vertical-align: top;
+   color: red;
+}
+
+.from-local {
+   vertical-align: top;
+   color: blue;
+}
+
+.message {
+   width: 350px;
+   padding-left: 20px;
+}
+
+.notice {
+   font-weight: bold;
+}
+
+.unregistered {
+   z-index: 1;
+   opacity: 0.0;
+   animation: unregistered-user-animation;
+   animation-duration: 1s;
+   animation-timing-function: linear;
+   animation-fill-mode: forwards;
+   -webkit-animation: unregistered-user-animation;
+   -webkit-animation-duration: 1s;
+   -webkit-animation-timing-function: linear;
+   -webkit-animation-fill-mode: forwards;
+
+}
+
+.registered {
+   opacity: 0.85;
+   z-index: -1;
+   animation: registered-user-animation;
+   animation-duration: 1s;
+   animation-timing-function: linear;
+   animation-fill-mode: forwards;
+   -webkit-animation: registered-user-animation;
+   -webkit-animation-duration: 1s;
+   -webkit-animation-timing-function: linear;
+   -webkit-animation-fill-mode: forwards;
+
+}
+
+@keyframes unregistered-user-animation {
+   0% {
+      z-index: 1;
+      opacity: 0.0;
+   }
+
+   100% {
+      opacity: 0.85;
+   }
+}
+
+@keyframes registered-user-animation {
+   0% {
+      opacity: 0.85;
+   }
+   
+   100% {
+      z-index: -1;
+      opacity: 0.0;
+   }
+}
+
+@-webkit-keyframes unregistered-user-animation {
+   0% {
+      z-index: 1;
+      opacity: 0.0;
+   }
+
+   100% {
+      opacity: 0.85;
+   }
+}
+
+@-webkit-keyframes registered-user-animation {
+   0% {
+      opacity: 0.85;
+   }
+   
+   100% {
+      z-index: -1;
+      opacity: 0.0;
+   }
+}

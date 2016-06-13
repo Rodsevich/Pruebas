@@ -1,0 +1,31 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'update', '-g', 'yo' ]
+2 info using npm@2.1.14
+3 info using node@v0.10.33
+4 silly mapToRegistry name yo
+5 silly mapToRegistry using default registry
+6 silly mapToRegistry registry http://registry.npmjs.org/
+7 silly mapToRegistry uri http://registry.npmjs.org/yo
+8 verbose request uri http://registry.npmjs.org/yo
+9 verbose request no auth needed
+10 info attempt registry request try #1 at 21:36:05
+11 verbose request id 51761c4c391335dd
+12 verbose etag "EAFUAX4J8W6LN8F7URG84TOCA"
+13 http request GET http://registry.npmjs.org/yo
+14 verbose type called_on_non_object
+15 verbose stack TypeError: Object.keys called on non-object
+15 verbose stack     at Function.keys (native)
+15 verbose stack     at unmarkExtraneous (/usr/lib/node_modules/npm/node_modules/read-installed/read-installed.js:362:10)
+15 verbose stack     at /usr/lib/node_modules/npm/node_modules/read-installed/read-installed.js:137:5
+15 verbose stack     at next (/usr/lib/node_modules/npm/node_modules/read-installed/read-installed.js:185:14)
+15 verbose stack     at /usr/lib/node_modules/npm/node_modules/read-installed/read-installed.js:169:14
+15 verbose stack     at Object.oncomplete (evalmachine.<anonymous>:107:15)
+16 verbose cwd /srv/http/pruebas
+17 error Linux 3.17.6-1-ARCH
+18 error argv "/usr/bin/node" "/usr/bin/npm" "update" "-g" "yo"
+19 error node v0.10.33
+20 error npm  v2.1.14
+21 error Object.keys called on non-object
+22 error If you need help, you may report this error at:
+22 error     <http://github.com/npm/npm/issues>
+23 verbose exit [ 1, true ]
