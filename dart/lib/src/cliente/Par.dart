@@ -12,12 +12,21 @@ Map _configuracion = {
   ]
 };
 
+Map _restriccionDeMedios = {
+  "optional": [
+    {"RtpDataChannels": true},
+    {"DtlsSrtpKeyAgreement": true}
+  ]
+};
+
+/// Objeto que el cliente tendrá por cada conexión con otro [Par], que lo proveerá
+/// de funcionalidad de alto nivel para facilitar la comunicación
 class Par {
   RtcPeerConnection conexion;
   RtcDataChannel canal;
 
   Par() {
-    this.conexion = new RtcPeerConnection(_configuracion);
+    this.conexion = new RtcPeerConnection(_configuracion, _restriccionDeMedios);
   }
 
   enviarMensaje(Mensaje msj);

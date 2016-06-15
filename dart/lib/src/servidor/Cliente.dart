@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'dart:async';
-import 'package:pruebas_dart/Mensaje.dart';
+import 'package:pruebas_dart/src/Mensaje.dart';
 
 class Cliente {
   String id, pseudonimo;
@@ -11,11 +11,11 @@ class Cliente {
   Cliente(this.canal) {
     _notificadorMensajes = new StreamController();
     onMensaje = _notificadorMensajes.stream;
-    canal.listen(_transformarAMensajes);
+    canal.listen(_manejarMensajes);
   }
 
-  void _transformarAMensajes(List<int> input) {
-    Mensaje msj = Mensaje.desdeBinario(input);
+  void _manejarMensajes(String input) {
+    Mensaje msj = Mensaje.desdeCodificacion(input);
     switch (msj) {
       default:
         this._notificadorMensajes.add(msj);

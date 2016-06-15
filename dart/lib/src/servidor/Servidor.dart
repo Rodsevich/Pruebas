@@ -13,7 +13,7 @@ class Servidor {
   Stream<PedidoWebSocket> onPedidoWebSocket;
 
   Servidor([int puerto = 4040]) {
-    HttpServer.bind('localhost', puerto).then((HttpServer srv) {
+    HttpServer.bind(InternetAddress.LOOPBACK_IP_V4, puerto).then((HttpServer srv) {
       _server = srv;
       _server.serverHeader = "Servidor hecho con Dart por Nico";
       _notificadorPedidosHTML = new StreamController();
