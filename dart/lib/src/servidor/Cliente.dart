@@ -15,10 +15,17 @@ class Cliente {
   }
 
   void _manejarMensajes(String input) {
-    Mensaje msj = Mensaje.desdeCodificacion(input);
+    Mensaje msj = new Mensaje.desdeCodificacion(input);
     switch (msj) {
       default:
-        this._notificadorMensajes.add(msj);
+        this._notificadorMensajes.add(new MensajeCliente(this, msj));
     }
   }
+}
+
+class MensajeCliente {
+  Cliente cliente;
+  Mensaje mensaje;
+
+  MensajeCliente(this.cliente, this.mensaje);
 }

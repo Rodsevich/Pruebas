@@ -2,24 +2,25 @@ import 'dart:io';
 import 'dart:async';
 
 import 'Cliente.dart';
-import 'package:pruebas_dart/Mensaje.dart';
+import 'package:pruebas_dart/src/Mensaje.dart';
 
 class Servidor {
   List<Cliente> clientes = [];
   HttpServer _server;
   StreamController _notificadorPedidosHTML;
   StreamController _notificadorPedidosWebSocket;
-  Stream<PedidoHTML> onPedidoHTML;
-  Stream<PedidoWebSocket> onPedidoWebSocket;
+  Stream<HttpRequest> get onPedidoHTML => _notificadorPedidosHTML.stream;
+  Stream<MensajeCliente> get onPedidoWebSocket =>
+      _notificadorPedidosWebSocket.stream;
 
   Servidor([int puerto = 4040]) {
-    HttpServer.bind(InternetAddress.LOOPBACK_IP_V4, puerto).then((HttpServer srv) {
+    HttpServer
+        .bind(InternetAddress.LOOPBACK_IP_V4, puerto)
+        .then((HttpServer srv) {
       _server = srv;
       _server.serverHeader = "Servidor hecho con Dart por Nico";
       _notificadorPedidosHTML = new StreamController();
       _notificadorPedidosWebSocket = new StreamController();
-      onPedidoHTML = _notificadorPedidosHTML.stream;
-      onPedidoWebSocket = _notificadorPedidosWebSocket.stream;
       _manejarPedidos();
     });
   }
@@ -36,22 +37,35 @@ class Servidor {
 
   _nuevaConexionWebSocket(WebSocket ws) {
     Cliente cliente = new Cliente(ws);
-    cliente.onMensaje.listen(_manejarPedidoDeCliente);
+    cliente.onMensaje.listen(_manejarMensajesDeCliente);
+    clientes.add(cliente);
   }
 
   _devolverPedidoInvalido(HttpRequest pedido) {
     HttpResponse respuesta = pedido.response;
     respuesta.statusCode = HttpStatus.FORBIDDEN;
-    respuesta.reasonPhrase = "conectate solo con WebSockets por favor";
+    respuesta.reasonPhrase =
+        "Este servidor está programado solo para WebSockets por ahora";
+    _notificadorPedidosHTML.add(pedido);
     respuesta.close();
   }
 
-  _manejarPedidoDeCliente(Mensaje msj) {
-    switch (msj) {
+  // @TODO: hacer algo menos negro que un MensajeCliente, tal vez estudiando
+  // el sistemas de eventos para encontrar algo mejor como un
+  // event.emitterObject y un event.data
+  _manejarMensajesDeCliente(MensajeCliente mensajeCliente) {
+    Cliente cliente = mensajeCliente.cliente;
+    Mensaje msj = mensajeCliente.mensaje;
+    switch (msj.tipo) {
+      case MensajesAPI.NEGOCIACION_WEBRTC:
+        break;
+      case MensajesAPI.COMANDO:
+        break;
+      case MensajesAPI.SUSCRIPCION:
+      case MensajesAPI.INDEFINIDO:
+      default:
+        throw new Exception(
+            "El cliente envió un mensaje desconocido (no se qué hacer)");
     }
   }
 }
-
-class PedidoHTML {}
-
-class PedidoWebSocket {}

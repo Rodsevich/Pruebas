@@ -1,5 +1,5 @@
 import "package:test/test.dart";
-import 'package:pruebas_dart/Mensaje.dart';
+import 'package:pruebas_dart/src/Mensaje.dart';
 import 'dart:convert';
 
 void main() {

@@ -8,6 +8,8 @@ enum MensajesAPI {
   INTERACCION
 }
 
+enum DestinatariosMensaje { SERVIDOR, TODOS, }
+
 class Mensaje {
   MensajesAPI tipo;
 
@@ -84,7 +86,7 @@ class MensajeNegociacionWebRTC extends Mensaje {
 
 /// Comando para que se ejecute funcionalidad remotamente
 /// WebAPP --> Cliente --> Servidor
-/// Servidor --> Cliente \[ --> WebAPP \] --> WebApp
+/// Servidor --> Cliente { --> WebAPP } --> WebApp
 class MensajeComando extends Mensaje {
   String comando;
   List<String> argumentos;
