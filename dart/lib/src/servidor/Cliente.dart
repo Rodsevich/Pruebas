@@ -16,7 +16,11 @@ class Cliente {
 
   void _manejarMensajes(String input) {
     Mensaje msj = new Mensaje.desdeCodificacion(input);
-    switch (msj) {
+    switch (msj.tipo) {
+      case MensajesAPI.SUSCRIPCION:
+        this.id = msj.id;
+        this.pseudonimo = msj.pseudonimo;
+        break;
       default:
         this._notificadorMensajes.add(new MensajeCliente(this, msj));
     }

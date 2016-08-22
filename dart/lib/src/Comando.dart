@@ -1,6 +1,9 @@
 enum ComandosAPI { INDEFINIDO, CAMBIAR_SLIDE, MOSTRAR_ALERT }
 
-class Comando {
+abstract class Comando {
+  /// variable que tendrá la referencia al objetoq ue ejecutará el comando
+  var ejecutor;
+  Function funcion_ejecutora;
   ComandosAPI tipo;
 
   Comando() {
@@ -26,12 +29,39 @@ class Comando {
   }
 
   ComandosAPI decodificacionComandoAPI(int index) => ComandosAPI.values[index];
+
+  ejecutar();
 }
 
 class CambiarSlide extends Comando {
-  CambiarSlide() {}
+  CambiarSlide(WebApp ejecutor) {
+    this.ejecutor = ejecutor;
+    this.funcion_ejecutora = ejecutarEnWebApp();
+  }
+
+  ejecutarEnWebApp() {}
 }
 
 class MostrarAlert extends Comando {
-  MostrarAlert() {}
+  MostrarAlert(WebApp ejecutor) {
+    this.ejecutor = ejecutor;
+    this.funcion_ejecutora = ejecutarEnWebApp();
+  }
+
+  ejecutarEnWebApp() {}
 }
+
+//class ComandoX extends Comando {
+//  ComandoX(Servidor ejecutor) {
+//    this.ejecutor = ejecutor;
+//    this.funcion_ejecutora = ejecutarEnServidor();
+//  }
+//
+//  ComandoX(WebApp ejecutor) {
+//    this.ejecutor = ejecutor;
+//    this.funcion_ejecutora = ejecutarEnWebApp();
+//  }
+//
+//  ejecutarEnServidor(){}
+//  ejecutarEnWebApp(){}
+//}

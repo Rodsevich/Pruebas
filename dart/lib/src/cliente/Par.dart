@@ -1,6 +1,5 @@
 import "dart:html";
-import "package:pruebas_dart/Mensaje.dart";
-import "package:pruebas_dart/Comando.dart";
+import "package:pruebas_dart/libs_cliente.dart";
 
 Map _configuracion = {
   "iceServers": const [

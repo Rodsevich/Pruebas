@@ -16,9 +16,9 @@ class Servidor {
     canal = new WebSocket(url);
     log("Esperando establecimiento del canal...");
     canal.onOpen.listen(_manejadorEstablecimientoDeCanal);
-    canal.onClose.listen(_manejadorCierreDeCanal);
     canal.onMessage.listen(_manejadorDatosDesdeCanal);
     canal.onError.listen(_manejadorErroresDeCanal);
+    canal.onClose.listen(_manejadorCierreDeCanal);
   }
 
   void mandarMensaje(Mensaje msj) {
@@ -27,6 +27,7 @@ class Servidor {
 
   void _manejadorEstablecimientoDeCanal(Event evt) {
     log("Websocket opened");
+
   }
 
   void _manejadorErroresDeCanal(ErrorEvent errorMessage) {

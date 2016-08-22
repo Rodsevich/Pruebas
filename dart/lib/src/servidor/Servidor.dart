@@ -4,6 +4,9 @@ import 'dart:async';
 import 'Cliente.dart';
 import 'package:pruebas_dart/src/Mensaje.dart';
 
+/// Clase propia de servidor (en donde se puede meter Shelf y demás tranquilamente)
+/// cuya función es la de abstraer las conexiones inter-pares de los clientes que
+/// son manejadas en background mientras que emite como eventos todo lo demás
 class Servidor {
   List<Cliente> clientes = [];
   HttpServer _server;
@@ -62,6 +65,7 @@ class Servidor {
       case MensajesAPI.COMANDO:
         break;
       case MensajesAPI.SUSCRIPCION:
+      case MensajesAPI.INFORMACION:
       case MensajesAPI.INDEFINIDO:
       default:
         throw new Exception(
