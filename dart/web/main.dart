@@ -40,7 +40,7 @@ enviarTexto() {
 
 void main() {
   querySelector('#output').text = "Solo video";
-  querySelector('#conectar').onClick.listen((_) => conectar());
+  querySelector('#conectar').onClick.listen((_) => conectarAlServidor());
   querySelector('#enviar').onClick.listen((_) => enviarTexto());
   querySelector('#texto')
       .onKeyPress

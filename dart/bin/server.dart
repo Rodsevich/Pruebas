@@ -22,13 +22,15 @@ main() async {
 }
 
 void handleWebSocket(WebSocket socket) {
-  conexiones[++id_actual] = socket;
+  conexiones.add(socket);
+  id_actual = conexiones.length;
   print('Client $id_actual connected!');
   socket.listen((String s) {
-    print('Client sent: $s');
+    int id = conexiones.indexOf(socket) + 1;
+    print('Client $id sent: $s');
     socket.add('echo: $s');
   }, onDone: () {
-    print('Client disconnected');
+    print('Client $id_actual disconnected');
   });
 }
 

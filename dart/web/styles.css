@@ -37,3 +37,11 @@ html, body {
 #chat > #comandos > #enviar {
   width: 85px;
 }
+
+.msj{
+  color: darkgreen;
+}
+
+.info{
+  color: grey;
+}

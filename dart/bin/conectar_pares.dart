@@ -25,31 +25,43 @@ main() async {
 }
 
 void enviarPares() {
-  List<int> ids;
-  for (var socket in conexiones) ids.add(conexiones.indexOf(socket));
-  for (var socket in conexiones) socket.add("pares,${JSON.encode(ids)}");
+  List<int> ids = [];
+  for (WebSocket socket in conexiones) ids.add(conexiones.indexOf(socket));
+  for (WebSocket socket in conexiones) socket.add("pares,${JSON.encode(ids)}");
 }
 
 void handleWebSocket(WebSocket socket) {
-  conexiones[++id_actual] = socket;
+  conexiones.add(socket);
+  id_actual = conexiones.indexOf(socket);
   print('Client $id_actual connected!');
   socket.add("reg,$id_actual");
   enviarPares();
-  socket.listen((String s) {
-    print('Client sent: $s');
-    List<String> msj = e.data.toString().split(',');
+  socket.listen((String mensaje) {
+    int id = conexiones.indexOf(socket);
+    print('Client $id sent: $mensaje');
+    List<String> msj = mensaje.split(',');
     switch (msj[0]) {
       case "offer":
         int idParAConectar = JSON.decode(msj[1]);
         var sessionDescriptionDelOfferer = msj[2];
-        conexiones[idParAConectar].add("oferr,$sessionDescriptionDelOfferer");
+        conexiones[idParAConectar]
+            .add("oferr,$id,$sessionDescriptionDelOfferer");
+        break;
+      case "answer":
+        int idParAConectar = JSON.decode(msj[1]);
+        var sessionDescriptionDelAnswerer = msj[2];
+        conexiones[idParAConectar].add("answer,$sessionDescriptionDelAnswerer");
         break;
       case "candidate":
     }
   }, onDone: () {
-    print('Client disconnected');
+    int id = conexiones.indexOf(socket);
+    conexiones[id] = null;
+    print('Client $id disconnected');
   });
 }
+
+manejarComunicaciones(int id, String datos) {}
 
 void serveRequest(HttpRequest request) {
   request.response.statusCode = HttpStatus.FORBIDDEN;

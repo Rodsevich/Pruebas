@@ -51,6 +51,7 @@ void conectarAlPar(_) {
 }
 
 void responderIceCandidate(RtcIceCandidateEvent evt) {
+  outputMessage("tengo q responder IceCandidate");
   RtcIceCandidate candidate = evt.candidate;
   ws.send("candidate,${JSON.encode(candidate)}");
 }
@@ -70,7 +71,7 @@ conectarAlServidor([String server = 'ws://localhost:4040/']) {
   });
 
   ws.onMessage.listen((MessageEvent e) {
-    outputMessage("$e.data (e.origin, e.type)");
+    outputMessage("${e.data} (${e.origin}, ${e.type})");
     List<String> msj = e.data.toString().split(',');
     switch (msj[0]) {
       case "reg":
@@ -82,6 +83,8 @@ conectarAlServidor([String server = 'ws://localhost:4040/']) {
       case "pares":
         pares = JSON.decode(msj[1]);
         pares.remove(id);
+        String pares_str = JSON.encode(pares);
+        outputMessage("Pares recibidos: $pares");
         selectorPares.children = null;
         selectorPares.disabled = false;
         for (int par in pares)
@@ -93,6 +96,22 @@ conectarAlServidor([String server = 'ws://localhost:4040/']) {
             candidato,
             () => outputMessage("candidato agregado"),
             (_) => outputMessage("error en el agregado de candidato"));
+        break;
+      case "offer":
+        String enviante = msj[1];
+        RtcSessionDescription desc_offer =
+            new RtcSessionDescription(JSON.decode(msj[2]));
+        conexion.setRemoteDescription(desc_offer);
+        conexion.createAnswer().then((RtcSessionDescription desc_answer) {
+          conexion.setLocalDescription(desc_answer);
+          ws.send("answer,$enviante,$desc_answer");
+        });
+        break;
+      case "answer":
+        RtcSessionDescription desc =
+            new RtcSessionDescription(JSON.decode(msj[1]));
+        conexion.setRemoteDescription(desc);
+        break;
     }
   });
 
@@ -103,7 +122,7 @@ conectarAlServidor([String server = 'ws://localhost:4040/']) {
 
 void outputMessage(String message, [String clase = "info"]) {
   Element e = new ParagraphElement();
-  e.classes = clase;
+  e.classes.add(clase);
   TextAreaElement pantalla = querySelector('#pantalla-chat');
   print(message);
   e.text = message;
