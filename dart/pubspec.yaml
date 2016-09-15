@@ -13,6 +13,8 @@ dependencies:
   test: "^0.12.13+4"
   shelf: any
   shelf_route: any
+  WebRTCnetmesh:
+    path: /home/nico/src/WebRTCnetmesh
 
 transformers:
 - dart_to_js_script_rewriter

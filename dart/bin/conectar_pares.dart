@@ -32,12 +32,11 @@ void enviarPares() {
 
 void handleWebSocket(WebSocket socket) {
   conexiones.add(socket);
-  id_actual = conexiones.indexOf(socket);
+	int id = ++id_actual;
   print('Client $id_actual connected!');
   socket.add(JSON.encode(["reg", id_actual]));
   enviarPares();
   socket.listen((String mensaje) {
-    int id = conexiones.indexOf(socket);
     print('Client $id sent: $mensaje');
     List msj = JSON.decode(mensaje);
     switch (msj[0]) {

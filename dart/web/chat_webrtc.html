@@ -28,10 +28,15 @@
       <button id="enviar">Enviar</button>
     </div>
   </div>
-  <select id="pares" name="pares" disabled="true">
-  </select>
-  <button id="conectar">Conectar</button>
-  <button id="desconectar" disabled>Desconectar</button>
+  <div id="conexion-servidor">
+    <input id="conexion-servidor__nombre" type="text" />
+    <button id="conexion-servidor__boton-conectar">Conectar al servidor</button>
+  </div>
+  <div id="conexion-par">
+    <select id="conexion-par__pares" name="pares" disabled="true"></select>
+    <button id="conexion-par__boton-conectar">Conectar al par</button>
+    <button id="conexion-par__boton-desconectar" disabled>Desconectar</button>
+  </div>
   <!-- <button id=""></button> -->
 
   <div id="output"></div>
